@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      # url需要设置字符集，避免数据库数据乱码
+      url: jdbc:mysql://localhost:3306/school?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: hnzy2005
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
