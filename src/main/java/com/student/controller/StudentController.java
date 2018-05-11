@@ -63,9 +63,16 @@ public class StudentController {
 	 * @param student
 	 * @param bindingResult 获取错误信息
 	 * @return 学生对象
+	 * 
+	 * 将返回对象改成Object对象：如果失败页面将直接输出失败信息，否则直接返回个json对象。这样的话格式就不统一，给用户提供接口时，
+	 * 客户端处无法返回对象。
+	 * 解决方法：创建个结果返回类,将数据封装，达到格式的统一（Result）	根据实际情况，传递相应的参数：code"错误码",msg"提示信息",data"具体的内容（对象）"
+	 * 
+	 * 如果在写程序时，发现代码有重复的，要立刻优化，如：写个utils(工具类)
 	 */
+	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/students/add")
-	public Result<Object> studentAdd(@Valid Student student,BindingResult bindingResult) {
+	public Result<Student> studentAdd(@Valid Student student,BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return ResultUitl.error(1, bindingResult.getFieldError().getDefaultMessage());
 		}
@@ -84,8 +91,8 @@ public class StudentController {
 	 * @throws Exception 
 	 */
 	@GetMapping(value="/students/{id}")
-	public Object findByStudent(@PathVariable("id") Integer id) throws Exception {
-		return service.findByStudent(id);
+	public void findByStudent(@PathVariable("id") Integer id) throws Exception {
+		service.findByStudent(id);
 	}
 	
 	/**
