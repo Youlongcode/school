@@ -35,9 +35,10 @@ public class StudentController {
 	@Autowired
 	private StudentService service;
 	
-	/*	如果需要根据某个或N个字段查询数据，只需在接口中添加相应的方法即可，注意：方法名需要规范*/
 	/**
 	 * 扩展查询，根据年龄查询数据
+	 * <br><br>
+	 * <b>如果需要根据某个或N个字段查询数据，只需在接口中添加相应的方法即可，注意：方法名需要规范 </b>
 	 * @param age
 	 * @return
 	 */
@@ -57,18 +58,21 @@ public class StudentController {
 	}
 	
 	/**
-	 * 添加一位学生
-	 * 如果一次添加的属性多，可以直接传一个对象就行
-	 * {@valid} 添加验证
 	 * @param student
 	 * @param bindingResult 获取错误信息
 	 * @return 学生对象
 	 * 
+	 * 添加一位学生<br>
+	 * 如果一次添加的属性多，可以直接传一个对象就行<br>
+	 * {@valid} 添加验证<br>
 	 * 将返回对象改成Object对象：如果失败页面将直接输出失败信息，否则直接返回个json对象。这样的话格式就不统一，给用户提供接口时，
-	 * 客户端处无法返回对象。
-	 * 解决方法：创建个结果返回类,将数据封装，达到格式的统一（Result）	根据实际情况，传递相应的参数：code"错误码",msg"提示信息",data"具体的内容（对象）"
+	 * 客户端处无法返回对象。<br>
+	 * 解决方法：创建个结果返回类,将数据封装，达到格式的统一（Result）	根据实际情况，传递相应的参数：code"错误码",
+	 * msg"提示信息",data"具体的内容（对象）"<br>
 	 * 
 	 * 如果在写程序时，发现代码有重复的，要立刻优化，如：写个utils(工具类)
+	 * 
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/students/add")
@@ -86,13 +90,14 @@ public class StudentController {
 	
 	/**
 	 * 查询一个学生信息
+	 * 
 	 * @param id
 	 * @return
 	 * @throws Exception 
 	 */
 	@GetMapping(value="/students/{id}")
-	public void findByStudent(@PathVariable("id") Integer id) throws Exception {
-		service.findByStudent(id);
+	public Student findByStudent(@PathVariable("id") Integer id) throws Exception {
+		return service.findByStudent(id);
 	}
 	
 	/**
